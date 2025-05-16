@@ -6,7 +6,7 @@
             "East Necluda"
         ],
         "description": "This low-level, gel-based monster can be found all over Hyrule. It tends to spring its attacks on unsuspecting prey from the ground or from trees. Its strength varies by size, and the type of jelly it drops varies depending on whether the Chuchu was heated up, cooled down, or shocked.",
-        "dlc": false,
+        "dlc": true,
         "drops": [
             "chuchu jelly"
         ],

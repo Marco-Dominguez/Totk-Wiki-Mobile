@@ -5,11 +5,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.example.totkbase.navigation.NavigationGraph
+import com.example.totkbase.ui.components.BottomNavigationBar
 import com.example.totkbase.ui.theme.TotKBaseTheme
 
 class MainActivity : ComponentActivity() {
@@ -18,11 +19,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             TotKBaseTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    MainContent(
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                MainContent()
             }
         }
     }
@@ -30,12 +27,13 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainContent(modifier: Modifier = Modifier) {
-}
+    val navController = rememberNavController()
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    TotKBaseTheme {
-        MainContent()
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        bottomBar = { BottomNavigationBar(navController) }
+    ) { innerPadding ->
+        NavigationGraph(navController, innerPadding)
     }
 }
+
