@@ -19,7 +19,7 @@ fun NavigationGraph(navController: NavHostController, paddingValues: PaddingValu
         modifier = Modifier.padding(paddingValues)
     ) {
         composable(Screen.Home.route) {
-            HomeScreen()
+            HomeScreen(navController)
         }
 
         composable(Screen.Monstruos.route) {
