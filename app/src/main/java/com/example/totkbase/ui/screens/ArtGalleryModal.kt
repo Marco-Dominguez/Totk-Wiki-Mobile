@@ -3,16 +3,19 @@ package com.example.totkbase.ui.screens
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -22,22 +25,26 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.totkbase.R
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
@@ -47,15 +54,23 @@ fun ArtGalleryModal(
     onDismiss: () -> Unit
 ) {
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
-
-    // Usar horizontalPager en lugar de lazyRow para mejor estabilidad
-    val pagerState = rememberPagerState(
-        initialPage = initialIndex,
-        pageCount = { artworks.size }
-    )
+    val scope = rememberCoroutineScope()
+    val listState = rememberLazyListState(initialFirstVisibleItemIndex = initialIndex)
+    // Obtenemos el ancho de la pantalla
+    val screenWidth = LocalConfiguration.current.screenWidthDp.dp
 
     // Estado para mantener la posición actual
     var currentIndex by remember { mutableIntStateOf(initialIndex) }
+
+    // Actualiza el índice cuando se desplaza
+    LaunchedEffect(listState.firstVisibleItemIndex) {
+        currentIndex = listState.firstVisibleItemIndex
+    }
+
+    // Configuramos el comportamiento de snap para que las imágenes se "ajusten" a la pantalla
+    val flingBehavior = rememberSnapFlingBehavior(
+        lazyListState = listState
+    )
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
@@ -63,27 +78,31 @@ fun ArtGalleryModal(
         containerColor = Color.Black.copy(alpha = 0.95f)
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
-            // Pager para navegar entre imágenes
-            HorizontalPager(
-                state = pagerState,
+            // Carrusel de imágenes con soporte para swipe
+            LazyRow(
+                state = listState,
+                flingBehavior = flingBehavior, // Aplicamos el comportamiento de snap
                 modifier = Modifier.fillMaxSize()
-            ) { page ->
-                val artwork = artworks[page]
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    AsyncImage(
-                        model = artwork.imageUrl,
-                        contentDescription = artwork.description,
-                        contentScale = ContentScale.Fit,
+            ) {
+                items(artworks.size) { index ->
+                    val artwork = artworks[index]
+                    // Cada elemento del carrusel ocupa el ancho completo de la pantalla
+                    Box(
                         modifier = Modifier
-                            .fillMaxSize()
-                            .padding(16.dp)
-                    )
+                            .width(screenWidth) // Fijamos el ancho al tamaño de la pantalla
+                            .fillMaxHeight(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        AsyncImage(
+                            model = artwork.imageUrl,
+                            contentDescription = artwork.description,
+                            contentScale = ContentScale.Fit,
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(16.dp)
+                        )
+                    }
                 }
-                // Actualizar el índice cuando cambia la página
-                currentIndex = page
             }
 
             // Controles e información
@@ -101,7 +120,7 @@ fun ArtGalleryModal(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = stringResource(id = R.string.gallery_title),
+                        text = "Galería de arte",
                         style = MaterialTheme.typography.titleLarge,
                         color = Color.White,
                         fontWeight = FontWeight.Bold
@@ -110,7 +129,7 @@ fun ArtGalleryModal(
                     IconButton(onClick = onDismiss) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_close),
-                            contentDescription = stringResource(id = R.string.close),
+                            contentDescription = "Cerrar",
                             tint = Color.White,
                             modifier = Modifier.size(24.dp)
                         )
@@ -144,19 +163,56 @@ fun ArtGalleryModal(
                             }
                         }
 
+                        // Descripción de la imagen actual
+                        Text(
+                            text = artworks[currentIndex].description,
+                            color = Color.White,
+                            style = MaterialTheme.typography.bodyLarge,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.padding(vertical = 4.dp)
+                        )
+
                         // Conteo de imágenes
                         Text(
-                            text = stringResource(
-                                id = R.string.gallery_image_count,
-                                currentIndex + 1,
-                                artworks.size
-                            ),
+                            text = "${currentIndex + 1} / ${artworks.size}",
                             color = Color.White,
-                            style = MaterialTheme.typography.bodyMedium,
+                            style = MaterialTheme.typography.bodySmall,
                             textAlign = TextAlign.Center
                         )
                     }
                 }
+            }
+
+            // Botones de navegación en los laterales (mantenemos como alternativa al swipe)
+            Row(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(vertical = 60.dp), // Espacio para los controles superiores e inferiores
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                // Botón anterior
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxSize()
+                        .clickable(enabled = currentIndex > 0) {
+                            scope.launch {
+                                listState.animateScrollToItem(currentIndex - 1)
+                            }
+                        }
+                )
+
+                // Botón siguiente
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxSize()
+                        .clickable(enabled = currentIndex < artworks.size - 1) {
+                            scope.launch {
+                                listState.animateScrollToItem(currentIndex + 1)
+                            }
+                        }
+                )
             }
         }
     }
