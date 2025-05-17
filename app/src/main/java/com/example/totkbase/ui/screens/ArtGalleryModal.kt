@@ -8,12 +8,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -36,6 +37,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -47,26 +49,28 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun ArtGalleryModal(
-    artworks: List<String>,
+    artworks: List<ArtworkInfo>,
     initialIndex: Int = 0,
     onDismiss: () -> Unit
 ) {
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val scope = rememberCoroutineScope()
-    val listState = rememberLazyListState()
+    val listState = rememberLazyListState(initialFirstVisibleItemIndex = initialIndex)
+    // Obtenemos el ancho de la pantalla
+    val screenWidth = LocalConfiguration.current.screenWidthDp.dp
 
     // Estado para mantener la posición actual
     var currentIndex by remember { mutableIntStateOf(initialIndex) }
-
-    // Inicialmente se posiciona en la imagen seleccionada
-    LaunchedEffect(initialIndex) {
-        listState.scrollToItem(initialIndex)
-    }
 
     // Actualiza el índice cuando se desplaza
     LaunchedEffect(listState.firstVisibleItemIndex) {
         currentIndex = listState.firstVisibleItemIndex
     }
+
+    // Configuramos el comportamiento de snap para que las imágenes se "ajusten" a la pantalla
+    val flingBehavior = rememberSnapFlingBehavior(
+        lazyListState = listState
+    )
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
@@ -74,25 +78,28 @@ fun ArtGalleryModal(
         containerColor = Color.Black.copy(alpha = 0.95f)
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
-            // Carrusel de imágenes
+            // Carrusel de imágenes con soporte para swipe
             LazyRow(
                 state = listState,
-                flingBehavior = rememberSnapFlingBehavior(lazyListState = listState),
+                flingBehavior = flingBehavior, // Aplicamos el comportamiento de snap
                 modifier = Modifier.fillMaxSize()
             ) {
-                itemsIndexed(artworks) { index, artUrl ->
+                items(artworks.size) { index ->
+                    val artwork = artworks[index]
+                    // Cada elemento del carrusel ocupa el ancho completo de la pantalla
                     Box(
-                        modifier = Modifier.fillMaxSize(),
+                        modifier = Modifier
+                            .width(screenWidth) // Fijamos el ancho al tamaño de la pantalla
+                            .fillMaxHeight(),
                         contentAlignment = Alignment.Center
                     ) {
                         AsyncImage(
-                            model = artUrl,
-                            contentDescription = "Artwork ${index + 1}",
+                            model = artwork.imageUrl,
+                            contentDescription = artwork.description,
                             contentScale = ContentScale.Fit,
                             modifier = Modifier
                                 .fillMaxSize()
                                 .padding(16.dp)
-                                .clickable { /* Absorbe los clicks para evitar cerrar el modal */ }
                         )
                     }
                 }
@@ -156,18 +163,27 @@ fun ArtGalleryModal(
                             }
                         }
 
+                        // Descripción de la imagen actual
+                        Text(
+                            text = artworks[currentIndex].description,
+                            color = Color.White,
+                            style = MaterialTheme.typography.bodyLarge,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.padding(vertical = 4.dp)
+                        )
+
                         // Conteo de imágenes
                         Text(
                             text = "${currentIndex + 1} / ${artworks.size}",
                             color = Color.White,
-                            style = MaterialTheme.typography.bodyMedium,
+                            style = MaterialTheme.typography.bodySmall,
                             textAlign = TextAlign.Center
                         )
                     }
                 }
             }
 
-            // Botones de navegación en los laterales (invisibles pero clickeables)
+            // Botones de navegación en los laterales (mantenemos como alternativa al swipe)
             Row(
                 modifier = Modifier
                     .fillMaxSize()

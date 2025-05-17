@@ -69,7 +69,7 @@ fun MonstruoDetailModal(monstruoId: String?, onDismiss: () -> Unit) {
                 // Icono DLC (solo si el monstruo es del DLC)
                 if (monstruo?.dlc == true) {
                     Icon(
-                        painter = painterResource(id = R.drawable.ic_dlc),
+                        painter = painterResource(id = R.drawable.dlc_item),
                         contentDescription = "DLC",
                         tint = MaterialTheme.colorScheme.tertiary,
                         modifier = Modifier
@@ -126,7 +126,7 @@ fun MonstruoDetailModal(monstruoId: String?, onDismiss: () -> Unit) {
                             modifier = Modifier.padding(bottom = 4.dp)
                         ) {
                             Icon(
-                                painter = painterResource(id = R.drawable.ic_location_pin),
+                                painter = painterResource(id = R.drawable.pink_pin),
                                 contentDescription = null,
                                 modifier = Modifier.size(16.dp),
                                 tint = MaterialTheme.colorScheme.primary
@@ -156,7 +156,7 @@ fun MonstruoDetailModal(monstruoId: String?, onDismiss: () -> Unit) {
                             modifier = Modifier.padding(bottom = 4.dp)
                         ) {
                             Icon(
-                                painter = painterResource(id = R.drawable.ic_item_box),
+                                painter = painterResource(id = R.drawable.drop_items),
                                 contentDescription = null,
                                 modifier = Modifier.size(16.dp),
                                 tint = MaterialTheme.colorScheme.secondary

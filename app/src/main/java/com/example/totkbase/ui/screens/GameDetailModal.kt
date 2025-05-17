@@ -156,7 +156,7 @@ fun GameDetailModal(game: GameInfo, onDismiss: () -> Unit) {
                     modifier = Modifier.padding(vertical = 4.dp)
                 ) {
                     Icon(
-                        painter = painterResource(id = R.drawable.ic_sword),
+                        painter = painterResource(id = R.drawable.bullet_point),
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.size(16.dp)

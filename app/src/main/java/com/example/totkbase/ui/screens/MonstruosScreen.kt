@@ -15,16 +15,13 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -38,13 +35,13 @@ import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
 import com.example.totkbase.R
 import com.example.totkbase.db.Datos
+import com.example.totkbase.navigation.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MonstruosScreen(navController: NavHostController) {
     val context = LocalContext.current
     val monsters = Datos.getMonsters(context)
-    var selectedMonstruoId by remember { mutableStateOf<Long?>(null) }
 
     Box(modifier = Modifier.fillMaxSize()) {
         LazyColumn(
@@ -53,13 +50,24 @@ fun MonstruosScreen(navController: NavHostController) {
                 .background(MaterialTheme.colorScheme.background)
                 .padding(16.dp)
         ) {
+            // Add section title
+            item {
+                Text(
+                    text = "Monstruos",
+                    style = MaterialTheme.typography.displaySmall,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(vertical = 16.dp)
+                )
+            }
+
             items(monsters) { monster ->
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 8.dp)
                         .clickable {
-                            selectedMonstruoId = monster.identificador
+                            // Usando navegación type-safe
+                            navController.navigate(Screen.MonstruoDetail.createRoute(monster.identificador.toString()))
                         }
                 ) {
                     Box(
@@ -68,7 +76,7 @@ fun MonstruosScreen(navController: NavHostController) {
                         // Icono DLC (solo se muestra si monster.dlc es true)
                         if (monster.dlc) {
                             Icon(
-                                painter = painterResource(id = R.drawable.ic_dlc),
+                                painter = painterResource(id = R.drawable.dlc_item),
                                 contentDescription = "DLC",
                                 tint = MaterialTheme.colorScheme.tertiary,
                                 modifier = Modifier
@@ -91,7 +99,7 @@ fun MonstruosScreen(navController: NavHostController) {
                                 contentScale = ContentScale.Crop,
                                 modifier = Modifier
                                     .size(70.dp)
-                                    .clip(CircleShape)
+                                    .clip(RoundedCornerShape(8.dp))
                             )
 
                             Spacer(modifier = Modifier.width(16.dp))
@@ -123,14 +131,6 @@ fun MonstruosScreen(navController: NavHostController) {
                     }
                 }
             }
-        }
-
-        // Mostrar el detalle del monstruo como un modal dentro de la misma pantalla
-        if (selectedMonstruoId != null) {
-            MonstruoDetailModal(
-                monstruoId = selectedMonstruoId.toString(),
-                onDismiss = { selectedMonstruoId = null }
-            )
         }
     }
 }

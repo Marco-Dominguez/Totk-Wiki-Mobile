@@ -7,9 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -51,21 +49,24 @@ fun CharacterDetailModal(character: CharacterInfo, onDismiss: () -> Unit) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(200.dp)
+                    .height(250.dp)  // Aumentado de 200dp a 250dp para hacer la imagen más alta
                     .clip(RoundedCornerShape(16.dp))
             ) {
                 AsyncImage(
                     model = character.imageUrl,
                     contentDescription = "Imagen de ${character.name}",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.fillMaxWidth()
+                    contentScale = ContentScale.FillWidth,
+
+                    modifier = Modifier.fillMaxWidth(),
+                    alignment = Alignment.TopCenter
+
                 )
 
                 // Gradiente para mejorar la legibilidad del texto
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(200.dp)
+                        .height(250.dp)  // Aumentado de 200dp a 250dp para coincidir con el contenedor
                         .background(
                             Brush.verticalGradient(
                                 colors = listOf(
@@ -91,18 +92,6 @@ fun CharacterDetailModal(character: CharacterInfo, onDismiss: () -> Unit) {
             }
 
             Spacer(modifier = Modifier.height(24.dp))
-
-            // Avatar circular
-            AsyncImage(
-                model = character.imageUrl,
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .size(120.dp)
-                    .clip(CircleShape)
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
 
             // Detalles del personaje
             Text(
@@ -137,8 +126,9 @@ fun CharacterDetailModal(character: CharacterInfo, onDismiss: () -> Unit) {
                 "Link" -> listOf("The Legend of Zelda", "Ocarina of Time", "Breath of the Wild", "Tears of the Kingdom")
                 "Zelda" -> listOf("The Legend of Zelda", "Ocarina of Time", "Wind Waker", "Tears of the Kingdom")
                 "Ganondorf" -> listOf("Ocarina of Time", "Wind Waker", "Twilight Princess", "Tears of the Kingdom")
-                "Midna" -> listOf("Twilight Princess")
+                "Paya" -> listOf("Breath of the Wild", "Tears of the Kingdom")
                 "Impa" -> listOf("Ocarina of Time", "Skyward Sword", "Breath of the Wild", "Tears of the Kingdom")
+                "Purah" -> listOf("Breath of the Wild", "Tears of the Kingdom")
                 else -> listOf()
             }
 
@@ -155,3 +145,4 @@ fun CharacterDetailModal(character: CharacterInfo, onDismiss: () -> Unit) {
         }
     }
 }
+

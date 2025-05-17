@@ -35,22 +35,22 @@ fun NavigationGraph(navController: NavHostController, paddingValues: PaddingValu
         }
 
         composable(
-            route = "monstruoDetail/{monstruoId}",
-            arguments = listOf(navArgument("monstruoId") { type = NavType.StringType })
+            route = Screen.MonstruoDetail.route,
+            arguments = listOf(navArgument(Screen.MonstruoDetail.ARG_MONSTRUO_ID) { type = NavType.StringType })
         ) { backStackEntry ->
-            val monstruoId = backStackEntry.arguments?.getString("monstruoId")
-            MonstruoDetailSheet(
+            val monstruoId = backStackEntry.arguments?.getString(Screen.MonstruoDetail.ARG_MONSTRUO_ID)
+            MonstruoDetailModal(
                 monstruoId = monstruoId,
                 onDismiss = { navController.popBackStack() }
             )
         }
 
         composable(
-            route = "equipoDetail/{equipoId}",
-            arguments = listOf(navArgument("equipoId") { type = NavType.StringType })
+            route = Screen.EquipoDetail.route,
+            arguments = listOf(navArgument(Screen.EquipoDetail.ARG_EQUIPO_ID) { type = NavType.StringType })
         ) { backStackEntry ->
-            val equipoId = backStackEntry.arguments?.getString("equipoId")
-            EquipoDetailSheet(
+            val equipoId = backStackEntry.arguments?.getString(Screen.EquipoDetail.ARG_EQUIPO_ID)
+            EquipoDetailModal(
                 equipoId = equipoId,
                 onDismiss = { navController.popBackStack() }
             )

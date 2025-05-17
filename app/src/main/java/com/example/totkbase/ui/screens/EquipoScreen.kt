@@ -20,10 +20,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,12 +33,12 @@ import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
 import com.example.totkbase.R
 import com.example.totkbase.db.Datos
+import com.example.totkbase.navigation.Screen
 
 @Composable
 fun EquipoScreen(navController: NavHostController) {
     val context = LocalContext.current
     val equipmentByType = Datos.getEquipment(context)
-    var selectedEquipoId by remember { mutableStateOf<Long?>(null) }
 
     Box(modifier = Modifier.fillMaxSize()) {
         LazyColumn(
@@ -55,9 +51,9 @@ fun EquipoScreen(navController: NavHostController) {
                 item {
                     Text(
                         text = tipo,
-                        style = MaterialTheme.typography.titleLarge,
+                        style = MaterialTheme.typography.displaySmall,
                         fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(vertical = 8.dp)
+                        modifier = Modifier.padding(vertical = 16.dp)
                     )
                 }
 
@@ -67,7 +63,8 @@ fun EquipoScreen(navController: NavHostController) {
                             .fillMaxWidth()
                             .padding(vertical = 4.dp)
                             .clickable {
-                                selectedEquipoId = equipo.identificador
+                                // Usando navegación type-safe
+                                navController.navigate(Screen.EquipoDetail.createRoute(equipo.identificador.toString()))
                             }
                     ) {
                         Box(
@@ -76,7 +73,7 @@ fun EquipoScreen(navController: NavHostController) {
                             // Icono DLC (solo se muestra si el equipo es del DLC)
                             if (equipo.dlc) {
                                 Icon(
-                                    painter = painterResource(id = R.drawable.ic_dlc),
+                                    painter = painterResource(id = R.drawable.dlc_item),
                                     contentDescription = "DLC",
                                     tint = MaterialTheme.colorScheme.tertiary,
                                     modifier = Modifier
@@ -132,14 +129,6 @@ fun EquipoScreen(navController: NavHostController) {
                     }
                 }
             }
-        }
-
-        // Mostrar el detalle del equipo como un modal dentro de la misma pantalla
-        if (selectedEquipoId != null) {
-            EquipoDetailModal(
-                equipoId = selectedEquipoId.toString(),
-                onDismiss = { selectedEquipoId = null }
-            )
         }
     }
 }

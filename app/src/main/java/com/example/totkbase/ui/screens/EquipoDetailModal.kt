@@ -73,7 +73,7 @@ fun EquipoDetailModal(equipoId: String?, onDismiss: () -> Unit) {
                 // Icono DLC (solo si el equipo es del DLC)
                 if (equipo?.dlc == true) {
                     Icon(
-                        painter = painterResource(id = R.drawable.ic_dlc),
+                        painter = painterResource(id = R.drawable.dlc_item),
                         contentDescription = "DLC",
                         tint = MaterialTheme.colorScheme.tertiary,
                         modifier = Modifier
@@ -131,7 +131,7 @@ fun EquipoDetailModal(equipoId: String?, onDismiss: () -> Unit) {
                             modifier = Modifier.padding(vertical = 4.dp)
                         ) {
                             Icon(
-                                painter = painterResource(id = R.drawable.ic_sword),
+                                painter = painterResource(id = R.drawable.atk_dmg),
                                 contentDescription = null,
                                 tint = Color.Red,
                                 modifier = Modifier.size(20.dp)
@@ -148,7 +148,7 @@ fun EquipoDetailModal(equipoId: String?, onDismiss: () -> Unit) {
                             modifier = Modifier.padding(vertical = 4.dp)
                         ) {
                             Icon(
-                                painter = painterResource(id = R.drawable.ic_shield),
+                                painter = painterResource(id = R.drawable.defense),
                                 contentDescription = null,
                                 tint = Color.Blue,
                                 modifier = Modifier.size(20.dp)
@@ -166,7 +166,7 @@ fun EquipoDetailModal(equipoId: String?, onDismiss: () -> Unit) {
                                 modifier = Modifier.padding(vertical = 4.dp)
                             ) {
                                 Icon(
-                                    painter = painterResource(id = R.drawable.ic_effect),
+                                    painter = painterResource(id = R.drawable.effect),
                                     contentDescription = null,
                                     tint = Color.Green,
                                     modifier = Modifier.size(20.dp)
@@ -179,22 +179,54 @@ fun EquipoDetailModal(equipoId: String?, onDismiss: () -> Unit) {
                             }
                         }
 
-                        // Ya que no existe 'type' en Properties, mostramos el tipo general del equipo
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.padding(vertical = 4.dp)
-                        ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.ic_item_box),
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.size(20.dp)
-                            )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text(
-                                text = "Tipo de arma: ${item.tipo}",
-                                style = MaterialTheme.typography.bodyMedium
-                            )
+                        if (item.tipo != null && item.tipo.isNotEmpty()) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier.padding(vertical = 4.dp)
+                            ) {
+                                if (item.tipo == "one-handed weapon" || item.tipo == "spear") {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.one_handed_weapon),
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.primary,
+                                        modifier = Modifier.size(20.dp)
+                                    )
+                                } else if (item.tipo == "two-handed weapon") {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.two_handed_weapon),
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.primary,
+                                        modifier = Modifier.size(20.dp)
+                                    )
+                                } else if (item.tipo == "bow") {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.bow),
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.primary,
+                                        modifier = Modifier.size(20.dp)
+                                    )
+                                }
+                                else if (item.tipo == "shield") {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.shield),
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.primary,
+                                        modifier = Modifier.size(20.dp)
+                                    )
+                                } else if (item.tipo == "arrow") {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.arrow),
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.primary,
+                                        modifier = Modifier.size(20.dp)
+                                    )
+                                }
+                                Spacer(modifier = Modifier.width(8.dp))
+                                Text(
+                                    text = "Tipo de arma: ${item.tipo}",
+                                    style = MaterialTheme.typography.bodyMedium
+                                )
+                            }
                         }
                     }
                 }
@@ -225,7 +257,7 @@ fun EquipoDetailModal(equipoId: String?, onDismiss: () -> Unit) {
                             modifier = Modifier.padding(bottom = 4.dp)
                         ) {
                             Icon(
-                                painter = painterResource(id = R.drawable.ic_location_pin),
+                                painter = painterResource(id = R.drawable.pink_pin),
                                 contentDescription = null,
                                 modifier = Modifier.size(16.dp),
                                 tint = MaterialTheme.colorScheme.primary

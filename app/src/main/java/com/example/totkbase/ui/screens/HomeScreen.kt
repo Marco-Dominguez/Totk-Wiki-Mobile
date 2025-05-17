@@ -61,6 +61,11 @@ import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
 import com.example.totkbase.R
 import com.example.totkbase.navigation.Screen
+import com.example.totkbase.ui.components.BodyText
+import com.example.totkbase.ui.components.DescriptionText
+import com.example.totkbase.ui.components.SmallText
+import com.example.totkbase.ui.components.TitleText
+import com.example.totkbase.ui.theme.HyliaSerifFamily
 import kotlinx.coroutines.launch
 
 @Composable
@@ -87,9 +92,6 @@ fun HomeScreen(navController: NavHostController) {
             // Resumen Histórico
             HistorySection()
 
-            // Carrusel de Juegos por Época
-            GamesCarouselSection()
-
             // Personajes Clave
             CharactersSection()
 
@@ -98,6 +100,9 @@ fun HomeScreen(navController: NavHostController) {
 
             // Galería de Arte o Fondos
             ArtGallerySection()
+
+            // Carrusel de Juegos por Época
+            GamesCarouselSection()
 
             // Sección de Curiosidades
             TriviaSection()
@@ -117,7 +122,7 @@ fun HeroBanner(onStartClick: () -> Unit) {
     ) {
         // Imagen de fondo (placeholder por ahora)
         AsyncImage(
-            model = "file:///android_asset/images/placeholder.svg",
+            model = "https://static1.thegamerimages.com/wordpress/wp-content/uploads/2022/09/Fci4XyPXoAAfLyV.jpg",
             contentDescription = "Zelda Hero Banner",
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
@@ -147,11 +152,12 @@ fun HeroBanner(onStartClick: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Zelda Encyclopedia",
+                text = "The Legend Of Zelda Tears of the Kingdom",
                 style = MaterialTheme.typography.displayLarge,
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                fontFamily = HyliaSerifFamily
             )
         }
 
@@ -179,28 +185,9 @@ fun HistorySection() {
             .fillMaxWidth()
             .padding(16.dp)
     ) {
-        Text(
-            text = "La Leyenda Comienza",
-            style = MaterialTheme.typography.displaySmall,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
-
-        Text(
-            text = "La saga The Legend of Zelda nació en 1986, creada por Shigeru Miyamoto y Takashi Tezuka para Nintendo Entertainment System. El juego original revolucionó la industria al introducir un mundo abierto con libertad de exploración, estableciendo las bases para un género completamente nuevo.",
-            style = MaterialTheme.typography.bodyLarge,
+        BodyText(
+            text = "The Legend of Zelda: Tears of the Kingdom (ゼルダの伝説 ティアーズ オブ ザ キングダム, Zeruda no Densetsu Tiāzu obu za Kingudamu ?) es un videojuego de la saga The Legend of Zelda, desarrollado por Nintendo para su consola Nintendo Switch. Es una secuela del videojuego de 2017 The Legend of Zelda: Breath of the Wild.",
             modifier = Modifier.padding(bottom = 8.dp)
-        )
-
-        Text(
-            text = "A lo largo de más de tres décadas, la serie ha evolucionado constantemente, manteniendo elementos icónicos como la Trifuerza, la princesa Zelda y el héroe Link, mientras introduce innovaciones en cada entrega. De los píxeles de la NES a los vastos mundos 3D de Nintendo Switch, Zelda ha definido la aventura en videojuegos.",
-            style = MaterialTheme.typography.bodyLarge,
-            modifier = Modifier.padding(bottom = 8.dp)
-        )
-
-        Text(
-            text = "Con cada nueva consola de Nintendo, la saga ha presentado experiencias que redefinen lo que un juego de aventuras puede ser, ganando innumerables premios y estableciendo a Zelda como una de las franquicias más influyentes y queridas en la historia de los videojuegos.",
-            style = MaterialTheme.typography.bodyLarge
         )
     }
 }
@@ -209,23 +196,23 @@ fun HistorySection() {
 fun GamesCarouselSection() {
     val consoleEras = listOf(
         "NES/SNES" to listOf(
-            GameInfo("The Legend of Zelda", 1986, "file:///android_asset/images/placeholder.svg"),
-            GameInfo("Zelda II: The Adventure of Link", 1987, "file:///android_asset/images/placeholder.svg"),
-            GameInfo("A Link to the Past", 1991, "file:///android_asset/images/placeholder.svg")
+            GameInfo("The Legend of Zelda", 1986, "https://upload.wikimedia.org/wikipedia/en/4/41/Legend_of_zelda_cover_%28with_cartridge%29_gold.png"),
+            GameInfo("Zelda II: The Adventure of Link", 1987, "https://assets-prd.ignimgs.com/2022/01/23/zelda2aol-sq-1642982095651.jpg"),
+            GameInfo("A Link to the Past", 1991, "https://m.media-amazon.com/images/I/71wfmH16Z8L.jpg")
         ),
         "N64/GC" to listOf(
-            GameInfo("Ocarina of Time", 1998, "file:///android_asset/images/placeholder.svg"),
-            GameInfo("Majora's Mask", 2000, "file:///android_asset/images/placeholder.svg"),
-            GameInfo("Wind Waker", 2002, "file:///android_asset/images/placeholder.svg"),
-            GameInfo("Twilight Princess", 2006, "file:///android_asset/images/placeholder.svg")
+            GameInfo("Ocarina of Time", 1998, "https://upload.wikimedia.org/wikipedia/en/5/57/The_Legend_of_Zelda_Ocarina_of_Time.jpg"),
+            GameInfo("Majora's Mask", 2000, "https://upload.wikimedia.org/wikipedia/en/6/60/The_Legend_of_Zelda_-_Majora%27s_Mask_Box_Art.jpg"),
+            GameInfo("Wind Waker", 2002, "https://i.ytimg.com/vi/-4vNnk3gWPA/hqdefault.jpg"),
+            GameInfo("Twilight Princess", 2006, "https://preview.redd.it/14l51q71ym961.png?auto=webp&s=d5b9f0440f53b8fd638dada6a919bb2fdad3e150")
         ),
         "Wii/WiiU" to listOf(
-            GameInfo("Skyward Sword", 2011, "file:///android_asset/images/placeholder.svg"),
-            GameInfo("Breath of the Wild", 2017, "file:///android_asset/images/placeholder.svg")
+            GameInfo("Skyward Sword", 2011, "https://howlongtobeat.com/games/10042_The_Legend_of_Zelda_Skyward_Sword.jpg"),
+            GameInfo("Breath of the Wild", 2017, "https://assets.nintendo.com/image/upload/q_auto/f_auto/ncom/software/switch/70010000000025/7137262b5a64d921e193653f8aa0b722925abc5680380ca0e18a5cfd91697f58")
         ),
         "Switch" to listOf(
-            GameInfo("Link's Awakening (Remake)", 2019, "file:///android_asset/images/placeholder.svg"),
-            GameInfo("Tears of the Kingdom", 2023, "file:///android_asset/images/placeholder.svg")
+            GameInfo("Link's Awakening (Remake)", 2019, "https://assets.nintendo.com/image/upload/q_auto/f_auto/ncom/software/switch/70010000020033/df825d5fc6747b66b051f5d3ba6a412fe625ea7878b6a10c93bb8312195682b1"),
+            GameInfo("Tears of the Kingdom", 2023, "https://locosxlosjuegos.com/wp-content/uploads/2023/07/tokt1.jpg")
         )
     )
 
@@ -237,7 +224,7 @@ fun GamesCarouselSection() {
             .padding(16.dp)
     ) {
         Text(
-            text = "Juegos por Época",
+            text = "Otros Juegos de Zelda",
             style = MaterialTheme.typography.displaySmall,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(bottom = 16.dp)
@@ -321,11 +308,12 @@ fun GameCard(game: GameInfo, onClick: () -> Unit) {
 @Composable
 fun CharactersSection() {
     val characters = listOf(
-        CharacterInfo("Link", "El héroe elegido por las diosas, portador de la Trifuerza del Valor. A lo largo de las distintas épocas de Hyrule, Link ha renacido para enfrentar el mal y proteger la tierra. Conocido por su valentía y determinación, este guerrero silencioso ha empuñado la Espada Maestra para sellar la oscuridad en innumerables ocasiones.", "file:///android_asset/images/placeholder.svg"),
-        CharacterInfo("Zelda", "Princesa de Hyrule y poseedora de la Trifuerza de la Sabiduría. Descendiente de la diosa Hylia, Zelda posee poderes místicos que se manifiestan en momentos de necesidad. Su sabiduría y liderazgo han sido fundamentales para la protección del reino a través de generaciones, trabajando junto a Link para mantener la paz.", "file:///android_asset/images/placeholder.svg"),
-        CharacterInfo("Ganondorf", "Rey de los Gerudo y manifestación del mal, portador de la Trifuerza del Poder. Su ambición por dominar Hyrule lo ha llevado a reencarnar a través de los siglos. Conocido también como Ganon en su forma bestial, representa la amenaza constante contra la que Link y Zelda deben unir fuerzas.", "file:///android_asset/images/placeholder.svg"),
-        CharacterInfo("Midna", "Princesa del Reino del Crepúsculo y guía de Link en Twilight Princess. Inicialmente burlona y manipuladora, Midna desarrolla un fuerte vínculo con Link durante su aventura. Su historia trágica como gobernante destronada la convierte en uno de los personajes más complejos y queridos de la saga.", "file:///android_asset/images/placeholder.svg"),
-        CharacterInfo("Impa", "Guardiana de la familia real y líder de los Sheikah. A través de las distintas eras, Impa ha servido como protectora, consejera y mentora tanto para la princesa Zelda como para Link. Sus conocimientos ancestrales y habilidades ninja han sido cruciales en momentos decisivos para la historia de Hyrule.", "file:///android_asset/images/placeholder.svg")
+        CharacterInfo("Link", "El héroe elegido por las diosas, portador de la Trifuerza del Valor. A lo largo de las distintas épocas de Hyrule, Link ha renacido para enfrentar el mal y proteger la tierra. Conocido por su valentía y determinación, este guerrero silencioso ha empuñado la Espada Maestra para sellar la oscuridad en innumerables ocasiones.", "https://oyster.ignimgs.com/mediawiki/apis.ign.com/the-legend-of-zelda-breath-of-the-wild-2/3/38/Link2.png"),
+        CharacterInfo("Zelda", "Princesa de Hyrule y poseedora de la Trifuerza de la Sabiduría. Descendiente de la diosa Hylia, Zelda posee poderes místicos que se manifiestan en momentos de necesidad. Su sabiduría y liderazgo han sido fundamentales para la protección del reino a través de generaciones, trabajando junto a Link para mantener la paz.", "https://i.blogs.es/5269c3/zelda-zelda-tears-of-the-kingdom/1366_2000.jpeg"),
+        CharacterInfo("Ganondorf", "Rey de los Gerudo y manifestación del mal, portador de la Trifuerza del Poder. Su ambición por dominar Hyrule lo ha llevado a reencarnar a través de los siglos. Conocido también como Ganon en su forma bestial, representa la amenaza constante contra la que Link y Zelda deben unir fuerzas.", "https://static.wikia.nocookie.net/zelda/images/b/b2/Ganondorf_The_Legend_of_Zelda_Tears_of_The_Kingdom_Perfil.jpg/revision/latest?cb=20230414230715&path-prefix=es"),
+        CharacterInfo("Paya", "Paya (Apaya en Hispanoamérica; Paya en inglés), es un personaje de The Legend of Zelda: Breath of the Wild. Es una Sheikah y puede ser encontrada en Kakariko, en la región de Necluda occidental. Es la nieta de Impa.", "https://noko-box.b-cdn.net/wp-content/uploads/2023/04/Paya_TOTK.jpg"),
+        CharacterInfo("Impa", "Guardiana de la familia real y líder de los Sheikah. A través de las distintas eras, Impa ha servido como protectora, consejera y mentora tanto para la princesa Zelda como para Link. Sus conocimientos ancestrales y habilidades ninja han sido cruciales en momentos decisivos para la historia de Hyrule.", "https://pbs.twimg.com/media/FzJEcimaUAApG8_?format=jpg&name=large"),
+        CharacterInfo("Purah", "Purah es un personaje de la serie The Legend of Zelda de Nintendo. Apareció originalmente en The Legend of Zelda: Breath of the Wild, donde a pesar de ser anciana aparece como una niña debido a un percance científico.", "https://noko-box.b-cdn.net/wp-content/uploads/2023/04/Purah_TOTK.jpg")
     )
 
     var selectedCharacter by remember { mutableStateOf<CharacterInfo?>(null) }
@@ -378,7 +366,7 @@ fun CharacterAvatar(character: CharacterInfo, onClick: () -> Unit) {
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .size(80.dp)
-                .clip(CircleShape)
+                .clip(RoundedCornerShape(8.dp))
         )
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -412,7 +400,7 @@ fun QuickLinksSection(navController: NavHostController) {
         ) {
             QuickLinkButton(
                 title = "Monstruos",
-                icon = painterResource(id = R.drawable.ic_monster),
+                icon = painterResource(id = R.drawable.monsters),
                 modifier = Modifier.weight(1f),
                 onClick = { navController.navigate(Screen.Monstruos.route) }
             )
@@ -421,7 +409,7 @@ fun QuickLinksSection(navController: NavHostController) {
 
             QuickLinkButton(
                 title = "Equipo",
-                icon = painterResource(id = R.drawable.ic_sword),
+                icon = painterResource(id = R.drawable.equipment),
                 modifier = Modifier.weight(1f),
                 onClick = { navController.navigate(Screen.Equipo.route) }
             )
@@ -430,7 +418,7 @@ fun QuickLinksSection(navController: NavHostController) {
 
             QuickLinkButton(
                 title = "Noticias",
-                icon = painterResource(id = R.drawable.ic_news),
+                icon = painterResource(id = R.drawable.noticias),
                 modifier = Modifier.weight(1f),
                 onClick = { navController.navigate(Screen.Noticias.route) }
             )
@@ -481,10 +469,9 @@ fun TriviaSection() {
             .fillMaxWidth()
             .padding(16.dp)
     ) {
-        Text(
+        TitleText(
             text = "¿Sabías que...?",
-            style = MaterialTheme.typography.displaySmall,
-            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
@@ -495,9 +482,8 @@ fun TriviaSection() {
                     .padding(vertical = 8.dp),
                 elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
             ) {
-                Text(
+                BodyText(
                     text = trivia,
-                    style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.padding(16.dp)
                 )
             }
@@ -522,7 +508,7 @@ fun FooterSection() {
         )
 
         Text(
-            text = "Zelda Encyclopedia 2023",
+            text = "The Legend of Zelda TOTK Wiki",
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold
         )
@@ -530,20 +516,8 @@ fun FooterSection() {
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = "Datos obtenidos de fuentes oficiales de Nintendo",
+            text = "Marco Antonio Domínguez Zamarrón - 216830",
             style = MaterialTheme.typography.bodyMedium
-        )
-
-        Text(
-            text = "Iconos por Material Design",
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
-        )
-
-        Text(
-            text = "Desarrollado con Jetpack Compose",
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
         )
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -552,41 +526,129 @@ fun FooterSection() {
 
 @Composable
 fun ArtGallerySection() {
-    val artworks = List(6) { "file:///android_asset/images/placeholder.svg" }
+    val artworks = listOf(
+        ArtworkInfo(
+            imageUrl = "https://images.nintendolife.com/67998e3c3f5ba/zelda-tears-of-the-kingdom.large.jpg",
+            description = "Link"
+        ),
+        ArtworkInfo(
+            imageUrl = "https://cloudfront-eu-central-1.images.arcpublishing.com/diarioas/LR65MOYRQVH6DMMYSIJPHWDJLA.jpg",
+            description = "Makeela Riju"
+        ),
+        ArtworkInfo(
+            imageUrl = "https://cloudfront-eu-central-1.images.arcpublishing.com/diarioas/F24LCQEFKZHN5DSIV7PA7K72UA.jpg",
+            description = "Tulin"
+        ),
+        ArtworkInfo(
+            imageUrl = "https://nintendoeverything.com/wp-content/uploads/Zelda-Tears-of-the-Kingdom-art-book-1.jpg",
+            description = "Link - Arte conceptual"
+        ),
+        ArtworkInfo(
+            imageUrl = "https://cdn.mall.adeptmind.ai/https%3A%2F%2Fmedia.gamestop.com%2Fi%2Fgamestop%2F20005393%2FThe-Legend-of-Zelda-Tears-of-the-Kingdom-Link-with-Sword-24-in-x-36-in-Rolled-Poster_large.webp",
+            description = "Link"
+        ),
+        ArtworkInfo(
+            imageUrl = "https://cloudfront-eu-central-1.images.arcpublishing.com/diarioas/ZX4HLOUJV5DOJCF2TCHFA23MDU.jpg",
+            description = "Link"
+        ),
+        ArtworkInfo(
+            imageUrl = "https://cl2.buscafs.com/www.levelup.com/public/uploads/images/850340/850340.jpg",
+            description = "Zelda - Arte conceptual"
+        ),
+        ArtworkInfo(
+            imageUrl = "https://i.etsystatic.com/11277520/r/il/5f9f83/4209642661/il_570xN.4209642661_t390.jpg",
+            description = "Banner TOTK"
+        ),
+        ArtworkInfo(
+            imageUrl = "https://cloudfront-eu-central-1.images.arcpublishing.com/diarioas/DP5H5TGJJFAGNPHB4DF233META.jpg",
+            description = "Bokoblins"
+        ),
+        ArtworkInfo(
+            imageUrl = "https://i.etsystatic.com/10064703/r/il/e0909d/4913234010/il_fullxfull.4913234010_lzcc.jpg",
+            description = "Link, Zelda y Ganon"
+        ),
+        ArtworkInfo(
+            imageUrl = "https://cloudfront-eu-central-1.images.arcpublishing.com/diarioas/FQSQJCEOQJEU3LESFP7ZKAHJWY.jpg",
+            description = "Ganondorf"
+        )
+    )
     var selectedArtIndex by remember { mutableStateOf<Int?>(null) }
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-    ) {
-        Text(
-            text = "Galería de Arte",
-            style = MaterialTheme.typography.displaySmall,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
-
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            contentPadding = PaddingValues(4.dp),
-            modifier = Modifier.height(280.dp)
+    Box(modifier = Modifier.fillMaxWidth()) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
         ) {
-            items(artworks.indices.toList()) { index ->
-                Card(
-                    modifier = Modifier
-                        .padding(4.dp)
-                        .fillMaxWidth()
-                        .height(130.dp)
-                        .clickable { selectedArtIndex = index }
+            Text(
+                text = "Galería de Arte",
+                style = MaterialTheme.typography.displaySmall,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(bottom = 16.dp)
+            )
+
+            Box(modifier = Modifier.fillMaxWidth()) {
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(2),
+                    contentPadding = PaddingValues(4.dp),
+                    modifier = Modifier.height(300.dp)
                 ) {
-                    AsyncImage(
-                        model = artworks[index],
-                        contentDescription = "Arte conceptual ${index + 1}",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier.fillMaxSize()
-                    )
+                    items(artworks) { artwork ->
+                        Card(
+                            modifier = Modifier
+                                .padding(4.dp)
+                                .fillMaxWidth()
+                                .height(130.dp)
+                                .clickable { selectedArtIndex = artworks.indexOf(artwork) }
+                        ) {
+                            Box(modifier = Modifier.fillMaxSize()) {
+                                AsyncImage(
+                                    model = artwork.imageUrl,
+                                    contentDescription = artwork.description,
+                                    contentScale = ContentScale.Crop,
+                                    modifier = Modifier.fillMaxSize()
+                                )
+
+                                // Overlay oscuro con texto para mejorar visibilidad
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(30.dp)
+                                        .align(Alignment.BottomCenter)
+                                        .background(Color.Black.copy(alpha = 0.6f)),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text(
+                                        text = artwork.description,
+                                        color = Color.White,
+                                        style = MaterialTheme.typography.labelMedium,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis
+                                    )
+                                }
+                            }
+                        }
+                    }
                 }
+
+                // Efecto de difuminado en la parte inferior de la galería
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .fillMaxWidth()
+                        .height(40.dp)
+                        .background(
+                            brush = Brush.verticalGradient(
+                                colors = listOf(
+                                    Color.Transparent,
+                                    MaterialTheme.colorScheme.background.copy(alpha = 0.7f),
+                                    MaterialTheme.colorScheme.background
+                                ),
+                                startY = 0f,
+                                endY = 100f
+                            )
+                        )
+                )
             }
         }
     }
@@ -600,3 +662,4 @@ fun ArtGallerySection() {
         )
     }
 }
+
