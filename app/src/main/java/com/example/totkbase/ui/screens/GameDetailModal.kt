@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -50,7 +51,6 @@ fun GameDetailModal(game: GameInfo, onDismiss: () -> Unit) {
                 .padding(16.dp)
                 .verticalScroll(scrollState)
         ) {
-            // Imagen del juego con título
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -59,12 +59,11 @@ fun GameDetailModal(game: GameInfo, onDismiss: () -> Unit) {
             ) {
                 AsyncImage(
                     model = game.imageUrl,
-                    contentDescription = "Imagen de ${game.title}",
+                    contentDescription = game.title,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxWidth()
                 )
 
-                // Gradiente para mejorar legibilidad
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -94,7 +93,7 @@ fun GameDetailModal(game: GameInfo, onDismiss: () -> Unit) {
                     )
 
                     Text(
-                        text = "Lanzamiento: ${game.year}",
+                        text = stringResource(R.string.game_release) + game.year,
                         style = MaterialTheme.typography.titleSmall,
                         color = Color.White
                     )
@@ -103,15 +102,13 @@ fun GameDetailModal(game: GameInfo, onDismiss: () -> Unit) {
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Información del juego
             Text(
-                text = "Sobre este juego",
+                text = stringResource(R.string.game_about),
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
 
-            // Descripción del juego según su título
             val description = when (game.title) {
                 "The Legend of Zelda" -> "El juego que comenzó todo. Un mundo abierto en forma de cuadrícula donde la exploración y el descubrimiento fueron las claves de su éxito revolucionario. Link debe recolectar los 8 fragmentos de la Trifuerza de la Sabiduría para derrotar a Ganon y rescatar a la Princesa Zelda."
                 "Zelda II: The Adventure of Link" -> "Una desviación de la fórmula original, introduce elementos de RPG y combate lateral. En esta aventura, Link debe encontrar los Palacios de Hyrule y despertar a la Princesa Zelda de un sueño eterno mientras evita que la sangre de Link sea usada para resucitar a Ganon."
@@ -133,15 +130,13 @@ fun GameDetailModal(game: GameInfo, onDismiss: () -> Unit) {
                 modifier = Modifier.padding(bottom = 16.dp)
             )
 
-            // Características destacadas
             Text(
-                text = "Características destacadas",
+                text = stringResource(R.string.game_features),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
 
-            // Lista de características según el juego
             val features = when (game.title) {
                 "The Legend of Zelda" -> listOf("Primer juego de la franquicia", "Mundo abierto no lineal", "Introducción de objetos icónicos como el boomerang y la Master Sword")
                 "Ocarina of Time" -> listOf("Primer juego 3D de la saga", "Sistema revolucionario de Z-targeting", "Viajes en el tiempo entre dos épocas", "Ocarina que permite aprender y tocar melodías mágicas")
@@ -171,9 +166,8 @@ fun GameDetailModal(game: GameInfo, onDismiss: () -> Unit) {
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            // Dato curioso
             Text(
-                text = "¿Sabías que...?",
+                text = stringResource(R.string.game_fun_fact_header),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,

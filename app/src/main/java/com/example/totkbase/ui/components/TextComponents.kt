@@ -11,10 +11,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import com.example.totkbase.ui.theme.FunnelSansFamily
 import com.example.totkbase.ui.theme.HyliaSerifFamily
 
-/**
- * Componente de texto que usa la fuente Funnel Sans para mostrar texto del cuerpo.
- * Esta fuente es ideal para textos largos y descripciones.
- */
 @Composable
 fun BodyText(
     text: String,
@@ -38,10 +34,7 @@ fun BodyText(
     )
 }
 
-/**
- * Componente de texto que usa la fuente Funnel Sans para mostrar texto de descripción.
- * Esta fuente es ideal para textos secundarios o más pequeños.
- */
+
 @Composable
 fun DescriptionText(
     text: String,
@@ -65,9 +58,7 @@ fun DescriptionText(
     )
 }
 
-/**
- * Componente de texto que usa la fuente Funnel Sans para textos pequeños como etiquetas.
- */
+
 @Composable
 fun SmallText(
     text: String,
@@ -91,10 +82,7 @@ fun SmallText(
     )
 }
 
-/**
- * Componente de texto que usa la fuente Hylia Serif específicamente para títulos.
- * Esta fuente es ideal para encabezados y títulos destacados con un aspecto temático de Zelda.
- */
+
 @Composable
 fun TitleText(
     text: String,

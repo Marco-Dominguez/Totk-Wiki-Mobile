@@ -22,10 +22,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import com.example.totkbase.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -45,16 +47,16 @@ fun CharacterDetailModal(character: CharacterInfo, onDismiss: () -> Unit) {
                 .verticalScroll(scrollState),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Imagen de encabezado
+
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(250.dp)  // Aumentado de 200dp a 250dp para hacer la imagen más alta
+                    .height(250.dp)
                     .clip(RoundedCornerShape(16.dp))
             ) {
                 AsyncImage(
                     model = character.imageUrl,
-                    contentDescription = "Imagen de ${character.name}",
+                    contentDescription = character.name,
                     contentScale = ContentScale.FillWidth,
 
                     modifier = Modifier.fillMaxWidth(),
@@ -62,11 +64,10 @@ fun CharacterDetailModal(character: CharacterInfo, onDismiss: () -> Unit) {
 
                 )
 
-                // Gradiente para mejorar la legibilidad del texto
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(250.dp)  // Aumentado de 200dp a 250dp para coincidir con el contenedor
+                        .height(250.dp)
                         .background(
                             Brush.verticalGradient(
                                 colors = listOf(
@@ -79,7 +80,6 @@ fun CharacterDetailModal(character: CharacterInfo, onDismiss: () -> Unit) {
                         )
                 )
 
-                // Nombre del personaje sobre la imagen
                 Text(
                     text = character.name,
                     style = MaterialTheme.typography.headlineMedium,
@@ -93,9 +93,8 @@ fun CharacterDetailModal(character: CharacterInfo, onDismiss: () -> Unit) {
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Detalles del personaje
             Text(
-                text = "Historia",
+                text = stringResource(R.string.character_history),
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center
@@ -112,9 +111,8 @@ fun CharacterDetailModal(character: CharacterInfo, onDismiss: () -> Unit) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Información adicional ficticia para enriquecer el modal
             Text(
-                text = "Apariciones destacadas",
+                text = stringResource(R.string.character_appearances),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center
@@ -140,7 +138,6 @@ fun CharacterDetailModal(character: CharacterInfo, onDismiss: () -> Unit) {
                 )
             }
 
-            // Espacio adicional al final
             Spacer(modifier = Modifier.height(32.dp))
         }
     }

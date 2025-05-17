@@ -39,6 +39,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -56,18 +57,15 @@ fun ArtGalleryModal(
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val scope = rememberCoroutineScope()
     val listState = rememberLazyListState(initialFirstVisibleItemIndex = initialIndex)
-    // Obtenemos el ancho de la pantalla
+
     val screenWidth = LocalConfiguration.current.screenWidthDp.dp
 
-    // Estado para mantener la posición actual
     var currentIndex by remember { mutableIntStateOf(initialIndex) }
 
-    // Actualiza el índice cuando se desplaza
     LaunchedEffect(listState.firstVisibleItemIndex) {
         currentIndex = listState.firstVisibleItemIndex
     }
 
-    // Configuramos el comportamiento de snap para que las imágenes se "ajusten" a la pantalla
     val flingBehavior = rememberSnapFlingBehavior(
         lazyListState = listState
     )
@@ -78,18 +76,17 @@ fun ArtGalleryModal(
         containerColor = Color.Black.copy(alpha = 0.95f)
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
-            // Carrusel de imágenes con soporte para swipe
             LazyRow(
                 state = listState,
-                flingBehavior = flingBehavior, // Aplicamos el comportamiento de snap
+                flingBehavior = flingBehavior,
                 modifier = Modifier.fillMaxSize()
             ) {
                 items(artworks.size) { index ->
                     val artwork = artworks[index]
-                    // Cada elemento del carrusel ocupa el ancho completo de la pantalla
+
                     Box(
                         modifier = Modifier
-                            .width(screenWidth) // Fijamos el ancho al tamaño de la pantalla
+                            .width(screenWidth)
                             .fillMaxHeight(),
                         contentAlignment = Alignment.Center
                     ) {
@@ -105,12 +102,10 @@ fun ArtGalleryModal(
                 }
             }
 
-            // Controles e información
             Column(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
-                // Título y botón cerrar
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -120,7 +115,7 @@ fun ArtGalleryModal(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "Galería de arte",
+                        text = stringResource(R.string.gallery_title),
                         style = MaterialTheme.typography.titleLarge,
                         color = Color.White,
                         fontWeight = FontWeight.Bold
@@ -129,14 +124,13 @@ fun ArtGalleryModal(
                     IconButton(onClick = onDismiss) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_close),
-                            contentDescription = "Cerrar",
+                            contentDescription = stringResource(R.string.gallery_close),
                             tint = Color.White,
                             modifier = Modifier.size(24.dp)
                         )
                     }
                 }
 
-                // Indicadores y conteo de imágenes
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -145,7 +139,7 @@ fun ArtGalleryModal(
                     contentAlignment = Alignment.Center
                 ) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        // Indicadores de posición
+
                         Row(
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
                             modifier = Modifier.padding(bottom = 8.dp)
@@ -163,7 +157,6 @@ fun ArtGalleryModal(
                             }
                         }
 
-                        // Descripción de la imagen actual
                         Text(
                             text = artworks[currentIndex].description,
                             color = Color.White,
@@ -183,14 +176,13 @@ fun ArtGalleryModal(
                 }
             }
 
-            // Botones de navegación en los laterales (mantenemos como alternativa al swipe)
+
             Row(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(vertical = 60.dp), // Espacio para los controles superiores e inferiores
+                    .padding(vertical = 60.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                // Botón anterior
                 Box(
                     modifier = Modifier
                         .weight(1f)
@@ -202,7 +194,6 @@ fun ArtGalleryModal(
                         }
                 )
 
-                // Botón siguiente
                 Box(
                     modifier = Modifier
                         .weight(1f)

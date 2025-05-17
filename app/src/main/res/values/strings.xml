@@ -58,16 +58,24 @@
 
     <!-- Art Gallery Modal -->
     <string name="gallery_title">Galería de arte</string>
-    <string name="gallery_image_count">%1$d / %2$d</string>
+    <string name="gallery_close">Cerrar</string>
 
     <!-- Character Detail Modal -->
     <string name="character_history">Historia</string>
     <string name="character_appearances">Apariciones destacadas</string>
 
     <!-- Game Detail Modal -->
-    <string name="game_release_year">Lanzamiento: %1$s</string>
+    <string name="game_release">Lanzamiento: </string>
     <string name="game_about">Sobre este juego</string>
     <string name="game_features">Características destacadas</string>
     <string name="game_fun_fact_header">¿Sabías que...?</string>
+
+    <!-- Equipment Detail Modal -->
+    <string name="one_handed_weapon">one-handed weapon</string>
+    <string name="two_handed_weapon">two-handed weapon</string>
+    <string name="shield">shield</string>
+    <string name="bow">bow</string>
+    <string name="arrow">arrow</string>
+    <string name="spear">spear</string>
 </resources>
 

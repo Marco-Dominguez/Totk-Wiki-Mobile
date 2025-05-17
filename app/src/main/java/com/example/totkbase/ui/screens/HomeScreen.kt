@@ -81,7 +81,6 @@ fun HomeScreen(navController: NavHostController) {
                 .fillMaxSize()
                 .verticalScroll(scrollState)
         ) {
-            // Banner Hero con título y botón flotante
             HeroBanner(
                 onStartClick = {
                     coroutineScope.launch {
@@ -90,25 +89,18 @@ fun HomeScreen(navController: NavHostController) {
                 }
             )
 
-            // Resumen Histórico
             HistorySection()
 
-            // Personajes Clave
             CharactersSection()
 
-            // Enlaces Rápidos
             QuickLinksSection(navController)
 
-            // Galería de Arte o Fondos
             ArtGallerySection()
 
-            // Carrusel de Juegos por Época
             GamesCarouselSection()
 
-            // Sección de Curiosidades
             TriviaSection()
 
-            // Footer con Créditos y Enlaces
             FooterSection()
         }
     }
@@ -121,7 +113,6 @@ fun HeroBanner(onStartClick: () -> Unit) {
             .fillMaxWidth()
             .height(400.dp)
     ) {
-        // Imagen de fondo (placeholder por ahora)
         AsyncImage(
             model = "https://static1.thegamerimages.com/wordpress/wp-content/uploads/2022/09/Fci4XyPXoAAfLyV.jpg",
             contentDescription = stringResource(id = R.string.hero_banner_content_description),
@@ -129,7 +120,6 @@ fun HeroBanner(onStartClick: () -> Unit) {
             modifier = Modifier.fillMaxSize()
         )
 
-        // Overlay gradiente para mejorar legibilidad del texto
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -145,7 +135,6 @@ fun HeroBanner(onStartClick: () -> Unit) {
                 )
         )
 
-        // Título centrado
         Column(
             modifier = Modifier
                 .align(Alignment.Center)
@@ -162,7 +151,6 @@ fun HeroBanner(onStartClick: () -> Unit) {
             )
         }
 
-        // Botón flotante para comenzar
         FloatingActionButton(
             onClick = onStartClick,
             modifier = Modifier
@@ -253,9 +241,6 @@ fun GamesCarouselSection() {
         }
     }
 
-
-
-    // Mostrar el modal de detalle del juego
     selectedGame?.let { game ->
         GameDetailModal(
             game = game,
@@ -346,7 +331,6 @@ fun CharactersSection() {
         }
     }
 
-    // Mostrar el modal de detalle del personaje
     selectedCharacter?.let { character ->
         CharacterDetailModal(
             character = character,
@@ -533,7 +517,6 @@ fun ArtGallerySection() {
                                 modifier = Modifier.fillMaxSize()
                             )
 
-                            // Overlay oscuro con texto para mejorar visibilidad
                             Box(
                                 modifier = Modifier
                                     .fillMaxWidth()
@@ -555,7 +538,6 @@ fun ArtGallerySection() {
                 }
             }
 
-            // Efecto de difuminado en la parte inferior de la galería
             Box(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
@@ -576,7 +558,6 @@ fun ArtGallerySection() {
         }
     }
 
-    // Mostrar el modal de galería cuando se selecciona una imagen
     selectedArtworkIndex?.let { index ->
         ArtGalleryModal(
             artworks = artworks,

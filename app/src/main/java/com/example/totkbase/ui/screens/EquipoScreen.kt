@@ -64,14 +64,12 @@ fun EquipoScreen(navController: NavHostController) {
                             .fillMaxWidth()
                             .padding(vertical = 4.dp)
                             .clickable {
-                                // Usando navegación type-safe
                                 navController.navigate(Screen.EquipoDetail.createRoute(equipo.identificador.toString()))
                             }
                     ) {
                         Box(
                             modifier = Modifier.fillMaxWidth()
                         ) {
-                            // Icono DLC (solo se muestra si el equipo es del DLC)
                             if (equipo.dlc) {
                                 Icon(
                                     painter = painterResource(id = R.drawable.dlc_item),
@@ -90,10 +88,9 @@ fun EquipoScreen(navController: NavHostController) {
                                     .padding(16.dp),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                // Imagen del equipo
                                 AsyncImage(
                                     model = equipo.imagen,
-                                    contentDescription = "Imagen de ${equipo.nombre}",
+                                    contentDescription = equipo.nombre,
                                     contentScale = ContentScale.Crop,
                                     modifier = Modifier
                                         .size(70.dp)

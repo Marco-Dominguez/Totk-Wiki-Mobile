@@ -58,7 +58,6 @@ fun MonstruoDetailModal(monstruoId: String?, onDismiss: () -> Unit) {
                 .padding(16.dp)
                 .verticalScroll(scrollState)
         ) {
-            // Encabezado con nombre y badge de DLC si aplica
             Box(modifier = Modifier.fillMaxWidth()) {
                 Text(
                     text = monstruo?.nombre ?: stringResource(R.string.monster_not_found),
@@ -67,7 +66,6 @@ fun MonstruoDetailModal(monstruoId: String?, onDismiss: () -> Unit) {
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
 
-                // Icono DLC (solo si el monstruo es del DLC)
                 if (monstruo?.dlc == true) {
                     Icon(
                         painter = painterResource(id = R.drawable.dlc_item),
@@ -81,11 +79,10 @@ fun MonstruoDetailModal(monstruoId: String?, onDismiss: () -> Unit) {
                 }
             }
 
-            // Imagen grande del monstruo
             monstruo?.let { monster ->
                 AsyncImage(
                     model = monster.imagen,
-                    contentDescription = "Imagen de ${monster.nombre}",
+                    contentDescription = monster.nombre,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -113,7 +110,6 @@ fun MonstruoDetailModal(monstruoId: String?, onDismiss: () -> Unit) {
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
 
-                // Localizaciones con icono de pin
                 if (!monster.localizacionesComunes.isNullOrEmpty()) {
                     Text(
                         text = stringResource(R.string.monster_common_locations),
@@ -143,7 +139,6 @@ fun MonstruoDetailModal(monstruoId: String?, onDismiss: () -> Unit) {
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                // Items que proporciona con icono de caja
                 if (!monster.proporciona.isNullOrEmpty()) {
                     Text(
                         text = stringResource(R.string.monster_drops),
@@ -171,7 +166,6 @@ fun MonstruoDetailModal(monstruoId: String?, onDismiss: () -> Unit) {
                     }
                 }
 
-                // Espacio adicional al final para mejor experiencia de scroll
                 Spacer(modifier = Modifier.height(16.dp))
             }
         }

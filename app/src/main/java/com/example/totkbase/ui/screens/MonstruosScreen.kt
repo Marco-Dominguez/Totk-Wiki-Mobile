@@ -50,7 +50,6 @@ fun MonstruosScreen(navController: NavHostController) {
                 .background(MaterialTheme.colorScheme.background)
                 .padding(16.dp)
         ) {
-            // Add section title
             item {
                 Text(
                     text = stringResource(R.string.monsters_title),
@@ -66,14 +65,12 @@ fun MonstruosScreen(navController: NavHostController) {
                         .fillMaxWidth()
                         .padding(vertical = 8.dp)
                         .clickable {
-                            // Usando navegación type-safe
                             navController.navigate(Screen.MonstruoDetail.createRoute(monster.identificador.toString()))
                         }
                 ) {
                     Box(
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        // Icono DLC (solo se muestra si monster.dlc es true)
                         if (monster.dlc) {
                             Icon(
                                 painter = painterResource(id = R.drawable.dlc_item),
@@ -92,10 +89,9 @@ fun MonstruosScreen(navController: NavHostController) {
                                 .padding(16.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            // Imagen del monstruo
                             AsyncImage(
                                 model = monster.imagen,
-                                contentDescription = "Imagen de ${monster.nombre}",
+                                contentDescription = monster.nombre,
                                 contentScale = ContentScale.Crop,
                                 modifier = Modifier
                                     .size(70.dp)

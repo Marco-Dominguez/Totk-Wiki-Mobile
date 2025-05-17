@@ -40,7 +40,6 @@ fun EquipoDetailModal(equipoId: String?, onDismiss: () -> Unit) {
     val context = LocalContext.current
     val id = equipoId?.toLongOrNull()
 
-    // Obtener todos los equipos y encontrar el que coincida con el ID
     val allEquipment = Datos.getEquipment(context).values.flatten()
     val equipo = id?.let { equipoId ->
         allEquipment.find { it.identificador == equipoId }
@@ -62,7 +61,6 @@ fun EquipoDetailModal(equipoId: String?, onDismiss: () -> Unit) {
                 .padding(16.dp)
                 .verticalScroll(scrollState)
         ) {
-            // Encabezado con nombre y badge de DLC si aplica
             Box(modifier = Modifier.fillMaxWidth()) {
                 Text(
                     text = equipo?.nombre ?: stringResource(R.string.equipment_not_found),
@@ -71,7 +69,6 @@ fun EquipoDetailModal(equipoId: String?, onDismiss: () -> Unit) {
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
 
-                // Icono DLC (solo si el equipo es del DLC)
                 if (equipo?.dlc == true) {
                     Icon(
                         painter = painterResource(id = R.drawable.dlc_item),
@@ -85,11 +82,10 @@ fun EquipoDetailModal(equipoId: String?, onDismiss: () -> Unit) {
                 }
             }
 
-            // Imagen grande del equipo
             equipo?.let { item ->
                 AsyncImage(
                     model = item.imagen,
-                    contentDescription = "Imagen de ${item.nombre}",
+                    contentDescription = item.nombre,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -111,7 +107,6 @@ fun EquipoDetailModal(equipoId: String?, onDismiss: () -> Unit) {
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
 
-                // Sección de estadísticas del arma
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -185,21 +180,21 @@ fun EquipoDetailModal(equipoId: String?, onDismiss: () -> Unit) {
                                 verticalAlignment = Alignment.CenterVertically,
                                 modifier = Modifier.padding(vertical = 4.dp)
                             ) {
-                                if (item.tipo == "one-handed weapon" || item.tipo == "spear") {
+                                if (item.tipo == stringResource(R.string.one_handed_weapon) || item.tipo == stringResource(R.string.spear)) {
                                     Icon(
                                         painter = painterResource(id = R.drawable.one_handed_weapon),
                                         contentDescription = null,
                                         tint = MaterialTheme.colorScheme.primary,
                                         modifier = Modifier.size(20.dp)
                                     )
-                                } else if (item.tipo == "two-handed weapon") {
+                                } else if (item.tipo == stringResource(R.string.two_handed_weapon)) {
                                     Icon(
                                         painter = painterResource(id = R.drawable.two_handed_weapon),
                                         contentDescription = null,
                                         tint = MaterialTheme.colorScheme.primary,
                                         modifier = Modifier.size(20.dp)
                                     )
-                                } else if (item.tipo == "bow") {
+                                } else if (item.tipo == stringResource(R.string.bow)) {
                                     Icon(
                                         painter = painterResource(id = R.drawable.bow),
                                         contentDescription = null,
@@ -207,14 +202,14 @@ fun EquipoDetailModal(equipoId: String?, onDismiss: () -> Unit) {
                                         modifier = Modifier.size(20.dp)
                                     )
                                 }
-                                else if (item.tipo == "shield") {
+                                else if (item.tipo == stringResource(R.string.shield)) {
                                     Icon(
                                         painter = painterResource(id = R.drawable.shield),
                                         contentDescription = null,
                                         tint = MaterialTheme.colorScheme.primary,
                                         modifier = Modifier.size(20.dp)
                                     )
-                                } else if (item.tipo == "arrow") {
+                                } else if (item.tipo == stringResource(R.string.arrow)) {
                                     Icon(
                                         painter = painterResource(id = R.drawable.arrow),
                                         contentDescription = null,
@@ -272,7 +267,6 @@ fun EquipoDetailModal(equipoId: String?, onDismiss: () -> Unit) {
                     }
                 }
 
-                // Espacio adicional al final para mejor experiencia de scroll
                 Spacer(modifier = Modifier.height(16.dp))
             }
         }
