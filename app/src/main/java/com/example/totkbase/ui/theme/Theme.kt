@@ -17,19 +17,19 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
-    primary = ColorPalette5,         // Medium green
-    onPrimary = ColorPalette1,       // Nearly white
+    primary = ColorPalette5,
+    onPrimary = ColorPalette1,
     primaryContainer = ColorPalette7,
     onPrimaryContainer = ColorPalette2,
-    secondary = ColorPalette4,       // Lighter green
-    onSecondary = ColorPalette11,    // Nearly black
+    secondary = ColorPalette4,
+    onSecondary = ColorPalette11,
     secondaryContainer = ColorPalette6,
     onSecondaryContainer = ColorPalette2,
-    tertiary = ColorPalette8,        // Deeper green
+    tertiary = ColorPalette8,
     onTertiary = ColorPalette1,
     tertiaryContainer = ColorPalette9,
     onTertiaryContainer = ColorPalette2,
-    background = DarkBackground,     // Dark brown-grey background
+    background = DarkBackground,
     onBackground = ColorPalette2,
     surface = DarkBackground.copy(alpha = 0.9f),
     onSurface = ColorPalette2,
@@ -40,20 +40,20 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = ColorPalette7,         // Deeper green for better contrast in light mode
-    onPrimary = ColorPalette1,       // Nearly white
+    primary = ColorPalette7,
+    onPrimary = ColorPalette1,
     primaryContainer = ColorPalette5,
     onPrimaryContainer = ColorPalette9,
-    secondary = ColorPalette6,       // Medium-dark green
-    onSecondary = ColorPalette1,     // Nearly white
+    secondary = ColorPalette6,
+    onSecondary = ColorPalette1,
     secondaryContainer = ColorPalette4,
     onSecondaryContainer = ColorPalette9,
-    tertiary = ColorPalette8,        // Deeper green
+    tertiary = ColorPalette8,
     onTertiary = ColorPalette1,
     tertiaryContainer = ColorPalette3,
     onTertiaryContainer = ColorPalette9,
-    background = LightBackground,    // Light beige background
-    onBackground = ColorPalette11,   // Nearly black
+    background = LightBackground,
+    onBackground = ColorPalette11,
     surface = LightBackground.copy(alpha = 0.9f),
     onSurface = ColorPalette9,
     surfaceVariant = ColorPalette2,
@@ -66,7 +66,7 @@ private val LightColorScheme = lightColorScheme(
 fun TotKBaseTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = false, // Setting to false by default to use our custom colors
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

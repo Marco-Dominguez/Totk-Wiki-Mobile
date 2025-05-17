@@ -1,6 +1,6 @@
 <resources>
     <!-- App Name -->
-    <string name="app_name">TotKBase</string>
+    <string name="app_name">TOTK WIKI</string>
 
     <!-- Navigation -->
     <string name="nav_home">Inicio</string>

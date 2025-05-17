@@ -2,11 +2,9 @@ package com.example.totkbase.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Backgrounds
 val LightBackground = Color(0xFFE2DED3)
 val DarkBackground = Color(0xFF312D2B)
 
-// Core palette
 val ColorPalette1 = Color(0xFFF3FAF7)
 val ColorPalette2 = Color(0xFFD8EFE6)
 val ColorPalette3 = Color(0xFFB0DFCE)
