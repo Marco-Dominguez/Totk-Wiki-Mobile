@@ -1,3 +1,73 @@
 <resources>
+    <!-- App Name -->
     <string name="app_name">TotKBase</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Inicio</string>
+    <string name="nav_monsters">Monstruos</string>
+    <string name="nav_equipment">Equipo</string>
+    <string name="nav_news">Noticias</string>
+
+    <!-- Common UI Elements -->
+    <string name="close">Cerrar</string>
+    <string name="back">Atrás</string>
+    <string name="view_more">Ver más</string>
+    <string name="dlc">DLC</string>
+
+    <!-- Home Screen -->
+    <string name="hero_banner_title">The Legend Of Zelda Tears of the Kingdom</string>
+    <string name="home_start_button">Comenzar</string>
+    <string name="home_history_description">The Legend of Zelda: Tears of the Kingdom (ゼルダの伝説 ティアーズ オブ ザ キングダム, Zeruda no Densetsu Tiāzu obu za Kingudamu ?) es un videojuego de la saga The Legend of Zelda, desarrollado por Nintendo para su consola Nintendo Switch. Es una secuela del videojuego de 2017 The Legend of Zelda: Breath of the Wild.</string>
+    <string name="home_characters_section">Personajes Clave</string>
+    <string name="home_explore_more">Explora Más</string>
+    <string name="home_art_gallery">Galería de Arte</string>
+    <string name="home_other_games">Otros Juegos de Zelda</string>
+    <string name="home_did_you_know">¿Sabías que...?</string>
+    <string name="home_footer">The Legend of Zelda TOTK Wiki</string>
+    <string name="home_credits">Marco Antonio Domínguez Zamarrón - 216830</string>
+
+    <!-- Content Descriptions for accessibility -->
+    <string name="hero_banner_content_description">Imagen de banner de Zelda</string>
+    <string name="hero_banner_button_content_description">Comenzar la exploración</string>
+    <string name="character_image_description">Imagen de %1$s</string>
+    <string name="game_image_description">Portada de %1$s</string>
+
+    <!-- Monsters Screen -->
+    <string name="monsters_title">Monstruos</string>
+    <string name="monster_category_prefix">Categoría: </string>
+    <string name="monster_description_label">Descripción:</string>
+    <string name="monster_common_locations">Localizaciones comunes:</string>
+    <string name="monster_drops">Items que proporciona:</string>
+    <string name="monster_not_found">Monstruo no encontrado</string>
+
+    <!-- Equipment Screen -->
+    <string name="equipment_title">Equipo</string>
+    <string name="equipment_type_prefix">Tipo: </string>
+    <string name="equipment_category_prefix">Categoría: </string>
+    <string name="equipment_description_label">Descripción:</string>
+    <string name="equipment_common_locations">Localizaciones comunes:</string>
+    <string name="equipment_stats">Estadísticas</string>
+    <string name="equipment_attack">Ataque: %1$s</string>
+    <string name="equipment_defense">Defensa: %1$s</string>
+    <string name="equipment_effect">Efecto: %1$s</string>
+    <string name="equipment_weapon_type">Tipo de arma: %1$s</string>
+    <string name="equipment_not_found">Equipo no encontrado</string>
+
+    <!-- News Screen -->
+    <string name="news_coming_soon">Próximamente: Noticias de Zelda</string>
+
+    <!-- Art Gallery Modal -->
+    <string name="gallery_title">Galería de arte</string>
+    <string name="gallery_image_count">%1$d / %2$d</string>
+
+    <!-- Character Detail Modal -->
+    <string name="character_history">Historia</string>
+    <string name="character_appearances">Apariciones destacadas</string>
+
+    <!-- Game Detail Modal -->
+    <string name="game_release_year">Lanzamiento: %1$s</string>
+    <string name="game_about">Sobre este juego</string>
+    <string name="game_features">Características destacadas</string>
+    <string name="game_fun_fact_header">¿Sabías que...?</string>
 </resources>
+

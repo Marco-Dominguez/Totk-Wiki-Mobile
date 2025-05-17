@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
@@ -60,7 +61,7 @@ fun MonstruoDetailModal(monstruoId: String?, onDismiss: () -> Unit) {
             // Encabezado con nombre y badge de DLC si aplica
             Box(modifier = Modifier.fillMaxWidth()) {
                 Text(
-                    text = monstruo?.nombre ?: "Monstruo no encontrado",
+                    text = monstruo?.nombre ?: stringResource(R.string.monster_not_found),
                     style = MaterialTheme.typography.headlineSmall,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(bottom = 16.dp)
@@ -70,7 +71,7 @@ fun MonstruoDetailModal(monstruoId: String?, onDismiss: () -> Unit) {
                 if (monstruo?.dlc == true) {
                     Icon(
                         painter = painterResource(id = R.drawable.dlc_item),
-                        contentDescription = "DLC",
+                        contentDescription = stringResource(R.string.dlc),
                         tint = MaterialTheme.colorScheme.tertiary,
                         modifier = Modifier
                             .align(Alignment.TopEnd)
@@ -95,13 +96,13 @@ fun MonstruoDetailModal(monstruoId: String?, onDismiss: () -> Unit) {
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
-                    text = "Categoría: ${monster.categoria}",
+                    text = stringResource(R.string.monster_category_prefix) + monster.categoria,
                     style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
 
                 Text(
-                    text = "Descripción:",
+                    text = stringResource(R.string.monster_description_label),
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(bottom = 4.dp)
@@ -115,7 +116,7 @@ fun MonstruoDetailModal(monstruoId: String?, onDismiss: () -> Unit) {
                 // Localizaciones con icono de pin
                 if (!monster.localizacionesComunes.isNullOrEmpty()) {
                     Text(
-                        text = "Localizaciones comunes:",
+                        text = stringResource(R.string.monster_common_locations),
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(bottom = 8.dp)
@@ -145,7 +146,7 @@ fun MonstruoDetailModal(monstruoId: String?, onDismiss: () -> Unit) {
                 // Items que proporciona con icono de caja
                 if (!monster.proporciona.isNullOrEmpty()) {
                     Text(
-                        text = "Items que proporciona:",
+                        text = stringResource(R.string.monster_drops),
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)

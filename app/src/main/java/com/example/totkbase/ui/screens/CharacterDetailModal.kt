@@ -145,4 +145,3 @@ fun CharacterDetailModal(character: CharacterInfo, onDismiss: () -> Unit) {
         }
     }
 }
-

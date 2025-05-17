@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -28,6 +27,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -53,7 +53,7 @@ fun MonstruosScreen(navController: NavHostController) {
             // Add section title
             item {
                 Text(
-                    text = "Monstruos",
+                    text = stringResource(R.string.monsters_title),
                     style = MaterialTheme.typography.displaySmall,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(vertical = 16.dp)
@@ -77,7 +77,7 @@ fun MonstruosScreen(navController: NavHostController) {
                         if (monster.dlc) {
                             Icon(
                                 painter = painterResource(id = R.drawable.dlc_item),
-                                contentDescription = "DLC",
+                                contentDescription = stringResource(R.string.dlc),
                                 tint = MaterialTheme.colorScheme.tertiary,
                                 modifier = Modifier
                                     .align(Alignment.TopEnd)
@@ -114,7 +114,7 @@ fun MonstruosScreen(navController: NavHostController) {
                                 Spacer(modifier = Modifier.height(4.dp))
 
                                 Text(
-                                    text = "Categoría: ${monster.categoria}",
+                                    text = stringResource(R.string.monster_category_prefix) + monster.categoria,
                                     style = MaterialTheme.typography.bodyMedium
                                 )
 

@@ -51,6 +51,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -123,7 +124,7 @@ fun HeroBanner(onStartClick: () -> Unit) {
         // Imagen de fondo (placeholder por ahora)
         AsyncImage(
             model = "https://static1.thegamerimages.com/wordpress/wp-content/uploads/2022/09/Fci4XyPXoAAfLyV.jpg",
-            contentDescription = "Zelda Hero Banner",
+            contentDescription = stringResource(id = R.string.hero_banner_content_description),
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
         )
@@ -152,7 +153,7 @@ fun HeroBanner(onStartClick: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "The Legend Of Zelda Tears of the Kingdom",
+                text = stringResource(id = R.string.hero_banner_title),
                 style = MaterialTheme.typography.displayLarge,
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
@@ -171,7 +172,7 @@ fun HeroBanner(onStartClick: () -> Unit) {
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_arrow_down),
-                contentDescription = "Comenzar",
+                contentDescription = stringResource(id = R.string.hero_banner_button_content_description),
                 tint = Color.White
             )
         }
@@ -186,7 +187,7 @@ fun HistorySection() {
             .padding(16.dp)
     ) {
         BodyText(
-            text = "The Legend of Zelda: Tears of the Kingdom (ゼルダの伝説 ティアーズ オブ ザ キングダム, Zeruda no Densetsu Tiāzu obu za Kingudamu ?) es un videojuego de la saga The Legend of Zelda, desarrollado por Nintendo para su consola Nintendo Switch. Es una secuela del videojuego de 2017 The Legend of Zelda: Breath of the Wild.",
+            text = stringResource(id = R.string.home_history_description),
             modifier = Modifier.padding(bottom = 8.dp)
         )
     }
@@ -224,7 +225,7 @@ fun GamesCarouselSection() {
             .padding(16.dp)
     ) {
         Text(
-            text = "Otros Juegos de Zelda",
+            text = "Juegos por Época",
             style = MaterialTheme.typography.displaySmall,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(bottom = 16.dp)
@@ -251,6 +252,8 @@ fun GamesCarouselSection() {
             }
         }
     }
+
+
 
     // Mostrar el modal de detalle del juego
     selectedGame?.let { game ->
@@ -324,7 +327,7 @@ fun CharactersSection() {
             .padding(16.dp)
     ) {
         Text(
-            text = "Personajes Clave",
+            text = stringResource(id = R.string.home_characters_section),
             style = MaterialTheme.typography.displaySmall,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(bottom = 16.dp)
@@ -362,7 +365,7 @@ fun CharacterAvatar(character: CharacterInfo, onClick: () -> Unit) {
     ) {
         AsyncImage(
             model = character.imageUrl,
-            contentDescription = character.name,
+            contentDescription = stringResource(id = R.string.character_image_description, character.name),
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .size(80.dp)
@@ -388,7 +391,7 @@ fun QuickLinksSection(navController: NavHostController) {
             .padding(16.dp)
     ) {
         Text(
-            text = "Explora Más",
+            text = stringResource(id = R.string.home_explore_more),
             style = MaterialTheme.typography.displaySmall,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(bottom = 16.dp)
@@ -399,7 +402,7 @@ fun QuickLinksSection(navController: NavHostController) {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             QuickLinkButton(
-                title = "Monstruos",
+                title = stringResource(id = R.string.nav_monsters),
                 icon = painterResource(id = R.drawable.monsters),
                 modifier = Modifier.weight(1f),
                 onClick = { navController.navigate(Screen.Monstruos.route) }
@@ -408,7 +411,7 @@ fun QuickLinksSection(navController: NavHostController) {
             Spacer(modifier = Modifier.width(16.dp))
 
             QuickLinkButton(
-                title = "Equipo",
+                title = stringResource(id = R.string.nav_equipment),
                 icon = painterResource(id = R.drawable.equipment),
                 modifier = Modifier.weight(1f),
                 onClick = { navController.navigate(Screen.Equipo.route) }
@@ -417,7 +420,7 @@ fun QuickLinksSection(navController: NavHostController) {
             Spacer(modifier = Modifier.width(16.dp))
 
             QuickLinkButton(
-                title = "Noticias",
+                title = stringResource(id = R.string.nav_news),
                 icon = painterResource(id = R.drawable.noticias),
                 modifier = Modifier.weight(1f),
                 onClick = { navController.navigate(Screen.Noticias.route) }
@@ -456,6 +459,134 @@ fun QuickLinkButton(title: String, icon: Painter, modifier: Modifier = Modifier,
 }
 
 @Composable
+fun ArtGallerySection() {
+    val artworks = listOf(
+        ArtworkInfo(
+            imageUrl = "https://images.nintendolife.com/67998e3c3f5ba/zelda-tears-of-the-kingdom.large.jpg",
+            description = "Link"
+        ),
+        ArtworkInfo(
+            imageUrl = "https://cloudfront-eu-central-1.images.arcpublishing.com/diarioas/LR65MOYRQVH6DMMYSIJPHWDJLA.jpg",
+            description = "Makeela Riju"
+        ),
+        ArtworkInfo(
+            imageUrl = "https://cloudfront-eu-central-1.images.arcpublishing.com/diarioas/F24LCQEFKZHN5DSIV7PA7K72UA.jpg",
+            description = "Tulin"
+        ),
+        ArtworkInfo(
+            imageUrl = "https://nintendoeverything.com/wp-content/uploads/Zelda-Tears-of-the-Kingdom-art-book-1.jpg",
+            description = "Link - Arte conceptual"
+        ),
+        ArtworkInfo(
+            imageUrl = "https://cdn.mall.adeptmind.ai/https%3A%2F%2Fmedia.gamestop.com%2Fi%2Fgamestop%2F20005393%2FThe-Legend-of-Zelda-Tears-of-the-Kingdom-Link-with-Sword-24-in-x-36-in-Rolled-Poster_large.webp",
+            description = "Link"
+        ),
+        ArtworkInfo(
+            imageUrl = "https://cloudfront-eu-central-1.images.arcpublishing.com/diarioas/ZX4HLOUJV5DOJCF2TCHFA23MDU.jpg",
+            description = "Link"
+        ),
+        ArtworkInfo(
+            imageUrl = "https://cl2.buscafs.com/www.levelup.com/public/uploads/images/850340/850340.jpg",
+            description = "Zelda - Arte conceptual"
+        ),
+        ArtworkInfo(
+            imageUrl = "https://i.etsystatic.com/11277520/r/il/5f9f83/4209642661/il_570xN.4209642661_t390.jpg",
+            description = "Banner TOTK"
+        )
+    )
+
+    var selectedArtworkIndex by remember { mutableStateOf<Int?>(null) }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = stringResource(id = R.string.home_art_gallery),
+            style = MaterialTheme.typography.displaySmall,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+
+        Box(modifier = Modifier.fillMaxWidth()) {
+            LazyVerticalGrid(
+                columns = GridCells.Adaptive(minSize = 128.dp),
+                contentPadding = PaddingValues(4.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.height(300.dp)
+            ) {
+                items(artworks) { artwork ->
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(130.dp)
+                            .clickable { selectedArtworkIndex = artworks.indexOf(artwork) },
+                        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+                    ) {
+                        Box(modifier = Modifier.fillMaxSize()) {
+                            AsyncImage(
+                                model = artwork.imageUrl,
+                                contentDescription = artwork.description,
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier.fillMaxSize()
+                            )
+
+                            // Overlay oscuro con texto para mejorar visibilidad
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(30.dp)
+                                    .align(Alignment.BottomCenter)
+                                    .background(Color.Black.copy(alpha = 0.6f)),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    text = artwork.description,
+                                    color = Color.White,
+                                    style = MaterialTheme.typography.labelMedium,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Efecto de difuminado en la parte inferior de la galería
+            Box(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .fillMaxWidth()
+                    .height(40.dp)
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                Color.Transparent,
+                                MaterialTheme.colorScheme.background.copy(alpha = 0.7f),
+                                MaterialTheme.colorScheme.background
+                            ),
+                            startY = 0f,
+                            endY = 100f
+                        )
+                    )
+            )
+        }
+    }
+
+    // Mostrar el modal de galería cuando se selecciona una imagen
+    selectedArtworkIndex?.let { index ->
+        ArtGalleryModal(
+            artworks = artworks,
+            initialIndex = index,
+            onDismiss = { selectedArtworkIndex = null }
+        )
+    }
+}
+
+@Composable
 fun TriviaSection() {
     val triviaItems = listOf(
         "El nombre de Link proviene de su función como 'enlace' entre el jugador y el mundo del juego",
@@ -470,7 +601,7 @@ fun TriviaSection() {
             .padding(16.dp)
     ) {
         TitleText(
-            text = "¿Sabías que...?",
+            text = stringResource(id = R.string.home_did_you_know),
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.padding(bottom = 16.dp)
         )
@@ -508,7 +639,7 @@ fun FooterSection() {
         )
 
         Text(
-            text = "The Legend of Zelda TOTK Wiki",
+            text = stringResource(id = R.string.home_footer),
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold
         )
@@ -516,150 +647,11 @@ fun FooterSection() {
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = "Marco Antonio Domínguez Zamarrón - 216830",
+            text = stringResource(id = R.string.home_credits),
             style = MaterialTheme.typography.bodyMedium
         )
 
         Spacer(modifier = Modifier.height(24.dp))
-    }
-}
-
-@Composable
-fun ArtGallerySection() {
-    val artworks = listOf(
-        ArtworkInfo(
-            imageUrl = "https://images.nintendolife.com/67998e3c3f5ba/zelda-tears-of-the-kingdom.large.jpg",
-            description = "Link"
-        ),
-        ArtworkInfo(
-            imageUrl = "https://cloudfront-eu-central-1.images.arcpublishing.com/diarioas/LR65MOYRQVH6DMMYSIJPHWDJLA.jpg",
-            description = "Makeela Riju"
-        ),
-        ArtworkInfo(
-            imageUrl = "https://cloudfront-eu-central-1.images.arcpublishing.com/diarioas/F24LCQEFKZHN5DSIV7PA7K72UA.jpg",
-            description = "Tulin"
-        ),
-        ArtworkInfo(
-            imageUrl = "https://nintendoeverything.com/wp-content/uploads/Zelda-Tears-of-the-Kingdom-art-book-1.jpg",
-            description = "Link - Arte conceptual"
-        ),
-        ArtworkInfo(
-            imageUrl = "https://cdn.mall.adeptmind.ai/https%3A%2F%2Fmedia.gamestop.com%2Fi%2Fgamestop%2F20005393%2FThe-Legend-of-Zelda-Tears-of-the-Kingdom-Link-with-Sword-24-in-x-36-in-Rolled-Poster_large.webp",
-            description = "Link"
-        ),
-        ArtworkInfo(
-            imageUrl = "https://cloudfront-eu-central-1.images.arcpublishing.com/diarioas/ZX4HLOUJV5DOJCF2TCHFA23MDU.jpg",
-            description = "Link"
-        ),
-        ArtworkInfo(
-            imageUrl = "https://cl2.buscafs.com/www.levelup.com/public/uploads/images/850340/850340.jpg",
-            description = "Zelda - Arte conceptual"
-        ),
-        ArtworkInfo(
-            imageUrl = "https://i.etsystatic.com/11277520/r/il/5f9f83/4209642661/il_570xN.4209642661_t390.jpg",
-            description = "Banner TOTK"
-        ),
-        ArtworkInfo(
-            imageUrl = "https://cloudfront-eu-central-1.images.arcpublishing.com/diarioas/DP5H5TGJJFAGNPHB4DF233META.jpg",
-            description = "Bokoblins"
-        ),
-        ArtworkInfo(
-            imageUrl = "https://i.etsystatic.com/10064703/r/il/e0909d/4913234010/il_fullxfull.4913234010_lzcc.jpg",
-            description = "Link, Zelda y Ganon"
-        ),
-        ArtworkInfo(
-            imageUrl = "https://cloudfront-eu-central-1.images.arcpublishing.com/diarioas/FQSQJCEOQJEU3LESFP7ZKAHJWY.jpg",
-            description = "Ganondorf"
-        )
-    )
-    var selectedArtIndex by remember { mutableStateOf<Int?>(null) }
-
-    Box(modifier = Modifier.fillMaxWidth()) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-        ) {
-            Text(
-                text = "Galería de Arte",
-                style = MaterialTheme.typography.displaySmall,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
-
-            Box(modifier = Modifier.fillMaxWidth()) {
-                LazyVerticalGrid(
-                    columns = GridCells.Fixed(2),
-                    contentPadding = PaddingValues(4.dp),
-                    modifier = Modifier.height(300.dp)
-                ) {
-                    items(artworks) { artwork ->
-                        Card(
-                            modifier = Modifier
-                                .padding(4.dp)
-                                .fillMaxWidth()
-                                .height(130.dp)
-                                .clickable { selectedArtIndex = artworks.indexOf(artwork) }
-                        ) {
-                            Box(modifier = Modifier.fillMaxSize()) {
-                                AsyncImage(
-                                    model = artwork.imageUrl,
-                                    contentDescription = artwork.description,
-                                    contentScale = ContentScale.Crop,
-                                    modifier = Modifier.fillMaxSize()
-                                )
-
-                                // Overlay oscuro con texto para mejorar visibilidad
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .height(30.dp)
-                                        .align(Alignment.BottomCenter)
-                                        .background(Color.Black.copy(alpha = 0.6f)),
-                                    contentAlignment = Alignment.Center
-                                ) {
-                                    Text(
-                                        text = artwork.description,
-                                        color = Color.White,
-                                        style = MaterialTheme.typography.labelMedium,
-                                        maxLines = 1,
-                                        overflow = TextOverflow.Ellipsis
-                                    )
-                                }
-                            }
-                        }
-                    }
-                }
-
-                // Efecto de difuminado en la parte inferior de la galería
-                Box(
-                    modifier = Modifier
-                        .align(Alignment.BottomCenter)
-                        .fillMaxWidth()
-                        .height(40.dp)
-                        .background(
-                            brush = Brush.verticalGradient(
-                                colors = listOf(
-                                    Color.Transparent,
-                                    MaterialTheme.colorScheme.background.copy(alpha = 0.7f),
-                                    MaterialTheme.colorScheme.background
-                                ),
-                                startY = 0f,
-                                endY = 100f
-                            )
-                        )
-                )
-            }
-        }
-    }
-
-    // Mostrar el modal de galería cuando se selecciona una imagen
-    selectedArtIndex?.let { index ->
-        ArtGalleryModal(
-            artworks = artworks,
-            initialIndex = index,
-            onDismiss = { selectedArtIndex = null }
-        )
     }
 }
 

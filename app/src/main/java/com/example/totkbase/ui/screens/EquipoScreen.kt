@@ -26,6 +26,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -74,7 +75,7 @@ fun EquipoScreen(navController: NavHostController) {
                             if (equipo.dlc) {
                                 Icon(
                                     painter = painterResource(id = R.drawable.dlc_item),
-                                    contentDescription = "DLC",
+                                    contentDescription = stringResource(R.string.dlc),
                                     tint = MaterialTheme.colorScheme.tertiary,
                                     modifier = Modifier
                                         .align(Alignment.TopEnd)
@@ -111,7 +112,7 @@ fun EquipoScreen(navController: NavHostController) {
                                     Spacer(modifier = Modifier.height(4.dp))
 
                                     Text(
-                                        text = "Categoría: ${equipo.categoria}",
+                                        text = stringResource(R.string.equipment_category_prefix) + equipo.categoria,
                                         style = MaterialTheme.typography.bodyMedium
                                     )
 

@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
@@ -64,7 +65,7 @@ fun EquipoDetailModal(equipoId: String?, onDismiss: () -> Unit) {
             // Encabezado con nombre y badge de DLC si aplica
             Box(modifier = Modifier.fillMaxWidth()) {
                 Text(
-                    text = equipo?.nombre ?: "Equipo no encontrado",
+                    text = equipo?.nombre ?: stringResource(R.string.equipment_not_found),
                     style = MaterialTheme.typography.headlineSmall,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(bottom = 16.dp)
@@ -74,7 +75,7 @@ fun EquipoDetailModal(equipoId: String?, onDismiss: () -> Unit) {
                 if (equipo?.dlc == true) {
                     Icon(
                         painter = painterResource(id = R.drawable.dlc_item),
-                        contentDescription = "DLC",
+                        contentDescription = stringResource(R.string.dlc),
                         tint = MaterialTheme.colorScheme.tertiary,
                         modifier = Modifier
                             .align(Alignment.TopEnd)
@@ -99,13 +100,13 @@ fun EquipoDetailModal(equipoId: String?, onDismiss: () -> Unit) {
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
-                    text = "Tipo: ${item.tipo}",
+                    text = stringResource(R.string.equipment_type_prefix) + item.tipo,
                     style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
 
                 Text(
-                    text = "Categoría: ${item.categoria}",
+                    text = stringResource(R.string.equipment_category_prefix) + item.categoria,
                     style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
@@ -120,7 +121,7 @@ fun EquipoDetailModal(equipoId: String?, onDismiss: () -> Unit) {
                         modifier = Modifier.padding(16.dp)
                     ) {
                         Text(
-                            text = "Estadísticas",
+                            text = stringResource(R.string.equipment_stats),
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold,
                             modifier = Modifier.padding(bottom = 8.dp)
@@ -138,7 +139,7 @@ fun EquipoDetailModal(equipoId: String?, onDismiss: () -> Unit) {
                             )
                             Spacer(modifier = Modifier.width(8.dp))
                             Text(
-                                text = "Ataque: ${item.propiedades.ataque}",
+                                text = stringResource(R.string.equipment_attack, item.propiedades.ataque),
                                 style = MaterialTheme.typography.bodyMedium
                             )
                         }
@@ -155,7 +156,7 @@ fun EquipoDetailModal(equipoId: String?, onDismiss: () -> Unit) {
                             )
                             Spacer(modifier = Modifier.width(8.dp))
                             Text(
-                                text = "Defensa: ${item.propiedades.defensa}",
+                                text = stringResource(R.string.equipment_defense, item.propiedades.defensa),
                                 style = MaterialTheme.typography.bodyMedium
                             )
                         }
@@ -173,7 +174,7 @@ fun EquipoDetailModal(equipoId: String?, onDismiss: () -> Unit) {
                                 )
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Text(
-                                    text = "Efecto: ${item.propiedades.efecto}",
+                                    text = stringResource(R.string.equipment_effect, item.propiedades.efecto),
                                     style = MaterialTheme.typography.bodyMedium
                                 )
                             }
@@ -223,7 +224,7 @@ fun EquipoDetailModal(equipoId: String?, onDismiss: () -> Unit) {
                                 }
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Text(
-                                    text = "Tipo de arma: ${item.tipo}",
+                                    text = stringResource(R.string.equipment_weapon_type, item.tipo),
                                     style = MaterialTheme.typography.bodyMedium
                                 )
                             }
@@ -232,7 +233,7 @@ fun EquipoDetailModal(equipoId: String?, onDismiss: () -> Unit) {
                 }
 
                 Text(
-                    text = "Descripción:",
+                    text = stringResource(R.string.equipment_description_label),
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(bottom = 4.dp)
@@ -246,7 +247,7 @@ fun EquipoDetailModal(equipoId: String?, onDismiss: () -> Unit) {
                 // Localizaciones con icono de pin
                 if (!item.localizacionesComunes.isNullOrEmpty()) {
                     Text(
-                        text = "Localizaciones comunes:",
+                        text = stringResource(R.string.equipment_common_locations),
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(bottom = 8.dp)
