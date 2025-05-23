@@ -77,5 +77,8 @@
     <string name="bow">bow</string>
     <string name="arrow">arrow</string>
     <string name="spear">spear</string>
+
+    <!-- News -->
+    <string name="news_title">Noticias</string>
 </resources>
 
