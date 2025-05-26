@@ -14,5 +14,6 @@ data class Equipo(
     @SerialName("name")             val nombre: String,
     @SerialName("type")             val tipo: String,
     @SerialName("properties")       val propiedades: Properties,
+    var discovered: Boolean = false
 )
 

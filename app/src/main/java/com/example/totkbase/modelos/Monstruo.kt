@@ -12,6 +12,7 @@ data class Monstruo (
     @SerialName("drops")            val proporciona: ArrayList<String>?   = arrayListOf(),
     @SerialName("id")               val identificador: Long,
     @SerialName("image")            val imagen: String,
-    @SerialName("name")             val nombre: String
+    @SerialName("name")             val nombre: String,
+    var discovered: Boolean = false
 )
 

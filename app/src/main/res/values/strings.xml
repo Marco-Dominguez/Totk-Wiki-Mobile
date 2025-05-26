@@ -15,7 +15,7 @@
     <string name="dlc">DLC</string>
 
     <!-- Home Screen -->
-    <string name="hero_banner_title">The Legend Of Zelda Tears of the Kingdom</string>
+    <string name="hero_banner_title">The Legend Of Zelda Tears of the Kingdom Wiki</string>
     <string name="home_start_button">Comenzar</string>
     <string name="home_history_description">The Legend of Zelda: Tears of the Kingdom (ゼルダの伝説 ティアーズ オブ ザ キングダム, Zeruda no Densetsu Tiāzu obu za Kingudamu ?) es un videojuego de la saga The Legend of Zelda, desarrollado por Nintendo para su consola Nintendo Switch. Es una secuela del videojuego de 2017 The Legend of Zelda: Breath of the Wild.</string>
     <string name="home_characters_section">Personajes Clave</string>
@@ -80,5 +80,9 @@
 
     <!-- News -->
     <string name="news_title">Noticias</string>
+    <string name="read_less">Leer menos</string>
+    <string name="read_more">Leer más</string>
+    <string name="all">Todos</string>
+    <string name="news_source">Fuente: %1$s</string>
 </resources>
 

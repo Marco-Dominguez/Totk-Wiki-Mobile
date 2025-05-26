@@ -64,6 +64,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.accompanist.swiperefresh)
 
-    implementation(libs.compose.bom)
-    // Se ha eliminado la dependencia problemática: androidx.material3.pulltorefresh
+    implementation(platform(libs.compose.bom))
+    implementation(libs.animated.navigation.bar)
+
 }

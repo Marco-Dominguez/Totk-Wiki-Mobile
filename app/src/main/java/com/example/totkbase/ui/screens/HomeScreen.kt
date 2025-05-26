@@ -1,6 +1,11 @@
 package com.example.totkbase.ui.screens
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -73,7 +78,9 @@ import kotlinx.coroutines.launch
 fun HomeScreen(navController: NavHostController) {
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
-    val historySectionPosition = remember { 400.dp }
+    val historySectionPosition = remember { 900.dp }
+
+    val showStickyHeader = scrollState.value > 700
 
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -103,6 +110,30 @@ fun HomeScreen(navController: NavHostController) {
 
             FooterSection()
         }
+
+        AnimatedVisibility(
+            visible = showStickyHeader,
+            enter = fadeIn() + slideInVertically(),
+            exit = fadeOut() + slideOutVertically(),
+            modifier = Modifier.align(Alignment.TopCenter)
+        ) {
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                color = MaterialTheme.colorScheme.primary,
+                shadowElevation = 4.dp
+            ) {
+                Text(
+                    text = stringResource(id = R.string.hero_banner_title),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    fontFamily = HyliaSerifFamily,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)
+                )
+            }
+        }
     }
 }
 
@@ -111,7 +142,7 @@ fun HeroBanner(onStartClick: () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(400.dp)
+            .height(380.dp)
     ) {
         AsyncImage(
             model = "https://static1.thegamerimages.com/wordpress/wp-content/uploads/2022/09/Fci4XyPXoAAfLyV.jpg",
